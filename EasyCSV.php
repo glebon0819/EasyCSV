@@ -1,5 +1,7 @@
 <?php
 class EasyCSV {
+
+	/*	These are redundant functions
 	
 	//Takes a CSV file with one column of data and outputs an array of values
 	public static function verticalOutput($path) {
@@ -24,9 +26,9 @@ class EasyCSV {
 		
 		return $array;
 	}
-	
+	*/
 	//Takes a CSV file with multiple rows/columns and outputs a 2D array of values
-	public static function twoDimensionalOutput($path) {
+	public static function CSVToArray($path) {
 		$array = self::verticalOutput($path);
 		foreach($array as &$sub) {
 			$sub = explode(",", $sub);
@@ -35,6 +37,11 @@ class EasyCSV {
 			throw new Exception ("CSV is empty");
 		}
 		return $array;
+	}
+	
+	//Takes an array as input and converts it to CSV format **Does not create/append to a file
+	public static function ArrayToCSV($array) {
+		
 	}
 	
 }
