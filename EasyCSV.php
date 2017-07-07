@@ -1,7 +1,8 @@
 <?php
 class EasyCSV {
 
-	//Takes a CSV file with multiple rows/columns and outputs a 2D array of values
+	//Input: path to CSV file
+	//Output: array with contents of CSV
 	public static function CSVToArray($path) {
 		if(count(file($path)) == 0) {
 			throw new Exception ("CSV is empty");
@@ -12,8 +13,8 @@ class EasyCSV {
 		}
 		return $array;
 	}
-	
-	//Takes an array as input and converts it to CSV format **Does not create/append to a file
+	//Input: array
+	//Output: string of array contents in CSV format
 	public static function ArrayToCSV($array) {
 		if(count($array) == 0) {
 			throw new Exception ("Array is empty");
@@ -27,10 +28,9 @@ class EasyCSV {
 			} else {
 				$result .= $obj;
 			}
-			$result .= "/n";
+			$result .= "\r\n ";
 		}
-		
+		return $result;
 	}
-	
 }
 ?>
