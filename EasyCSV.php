@@ -13,24 +13,35 @@ class EasyCSV {
 		}
 		return $array;
 	}
-	//Input: array
-	//Output: string of array contents in CSV format
-	public static function ArrayToCSV($array) {
+	//Input: array, name of file (String)
+	//Output: None, creates a CSV file using dumpCSV()
+	 public static function ArrayToCSV($array, $fileName) {
 		if(count($array) == 0) {
 			throw new Exception ("Array is empty");
 		}
 		$result = "";
 		foreach($array as $obj) {
-			if(count($obj) > 1) {
-				foreach($obj as $smallobj) {
-					$result .= $smallobj . ",";
-				}
+			if(is_array($obj)) {
+				
+				$result .= implode(",", $obj);
 			} else {
 				$result .= $obj;
 			}
-			$result .= "\r\n ";
+			$result .= "\r\n";
 		}
-		return $result;
+		try {
+			self::dumpCSV($result, $fileName);
+			return true;
+		} catch(Exception $e){
+			return false;
+		}
 	}
+	//Input: String of contents, file name
+	//Output: Creation of csv file
+	public static function dumpCSV($contents, $fileName) {
+		$newFile = file_put_contents($fileName . ".csv", $contents, FILE_APPEND | LOCK_EX);
+	}
+	
+	//ADD: optional parameter, boolean, to see if append or to overwrite.
 }
 ?>
