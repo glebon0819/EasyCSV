@@ -9,7 +9,9 @@ class EasyCSV {
 		}
 		$array = file($path);
 		foreach($array as &$sub) {
-			$sub = explode(",", $sub);
+			if(strpos($sub, ",") !== false) {
+				$sub = explode(",", $sub);
+			}
 		}
 		return $array;
 	}
